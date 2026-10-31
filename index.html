@@ -115,6 +115,8 @@ body::before {
 }
 .hero .wrap { padding-block: clamp(48px, 9vw, 120px); display: grid; gap: clamp(28px, 4vw, 44px); }
 .logos { display: flex; align-items: center; gap: clamp(16px, 4vw, 40px); flex-wrap: wrap; }
+.logo-link { display: block; border-radius: 8px; transition: transform .2s ease, opacity .2s ease; }
+.logo-link:hover { transform: translateY(-2px); opacity: .85; }
 .logos .wild { width: clamp(118px, 18vw, 180px); }
 .logos .vox { width: clamp(150px, 24vw, 240px); }
 .logos .x { font-family: var(--f-display); font-weight: 300; font-size: var(--step-2); color: var(--ink-soft); }
@@ -328,7 +330,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .flip-inner { transition: none; }
-  .btn, .plus, .more > summary::after { transition: none; }
+  .btn, .plus, .more > summary::after, .logo-link { transition: none; }
 }
 </style>
 </head>
@@ -358,9 +360,9 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 <section class="hero" id="inicio">
   <div class="wrap">
     <div class="logos" aria-label="Wild Consultora y Vox Estrategias de Comunicación">
-      <img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240">
+      <a class="logo-link" href="https://www.wildconsultora.com" target="_blank" rel="noopener" title="Ir a wildconsultora.com"><img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240"></a>
       <span class="x" aria-hidden="true">+</span>
-      <img class="vox" src="img/vox.png" alt="Vox Estrategias de Comunicación" width="1129" height="383">
+      <a class="logo-link" href="https://agencia-vox.com/" target="_blank" rel="noopener" title="Ir a agencia-vox.com"><img class="vox" src="img/vox.png" alt="Vox Estrategias de Comunicación" width="1129" height="383"></a>
     </div>
     <h1>Wild Vox<span class="ast">*</span></h1>
     <p class="slogan">Potenciá lo mejor de tu empresa.</p>
@@ -796,8 +798,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     <p class="eyebrow">Hablemos</p>
     <p class="callout-big">Transformemos la comunicación de tu empresa en <em>un activo estratégico que potencie tu negocio.</em></p>
     <div class="logos-light">
-      <img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240">
-      <img class="vox" src="img/vox.png" alt="Vox Estrategias de Comunicación" width="1129" height="383">
+      <a class="logo-link" href="https://www.wildconsultora.com" target="_blank" rel="noopener" title="Ir a wildconsultora.com"><img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240"></a>
+      <a class="logo-link" href="https://agencia-vox.com/" target="_blank" rel="noopener" title="Ir a agencia-vox.com"><img class="vox" src="img/vox.png" alt="Vox Estrategias de Comunicación" width="1129" height="383"></a>
     </div>
   </div>
 </section>
