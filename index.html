@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wild Vox</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Wild Vox: alianza entre Wild Consultora y Vox Estrategias de Comunicación. La comunicación como activo estratégico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Young+Serif&display=swap">
+<style>
+/* Layout: presentación vertical. Cada sección es una "lámina" con un titular grande
+   y el detalle escondido detrás de un clic (tarjetas que giran y acordeones).
+   Paleta: verde oscuro compartido por ambas marcas + rosados; lila (Wild) y coral (Vox) como acentos. */
+:root {
+  --paper: #FFF7F2;      /* champagne muy claro (Wild) */
+  --paper-2: #FEE9DD;    /* champagne pink (Wild) */
+  --ink: #003731;        /* dark green (Wild) ≈ #054F44 (Vox) */
+  --ink-soft: #3E5F59;
+  --green: #376A62;      /* myrtle green (Wild) */
+  --mint: #B7DECE;       /* tiffany blue (Wild) */
+  --wisteria: #D3AAE0;   /* acento Wild */
+  --coral: #E95132;      /* naranja Vox */
+  --blush: #F5B1B2;      /* rosa Vox */
+  --brick: #991915;      /* rojo oscuro Vox */
+  --line: rgba(0, 55, 49, .16);
+
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-serif: "Young Serif", Georgia, "Times New Roman", serif;
+  --f-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+  --step--1: clamp(.82rem, .8rem + .1vw, .9rem);
+  --step-0: clamp(1rem, .96rem + .2vw, 1.12rem);
+  --step-1: clamp(1.2rem, 1.1rem + .5vw, 1.45rem);
+  --step-2: clamp(1.5rem, 1.25rem + 1.2vw, 2.2rem);
+  --step-3: clamp(2rem, 1.5rem + 2.6vw, 3.6rem);
+  --step-4: clamp(2.6rem, 1.6rem + 5vw, 5.6rem);
+
+  --wrap: 1120px;
+  --radius: 18px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+h1, h2, h3 { font-family: var(--f-display); margin: 0; text-wrap: balance; line-height: 1.05; }
+h2 { font-size: var(--step-3); font-weight: 800; font-stretch: 118%; letter-spacing: -.01em; }
+h3 { font-size: var(--step-1); font-weight: 700; font-stretch: 110%; }
+p { margin: 0; }
+.eyebrow {
+  font-size: var(--step--1);
+  font-weight: 600;
+  font-stretch: 120%;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--green);
+}
+.lead { font-size: var(--step-1); line-height: 1.45; max-width: 38ch; }
+.prose { max-width: 64ch; display: grid; gap: 1em; }
+.ast { color: var(--wisteria); }
+
+/* ---------- Barra superior ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--paper);
+}
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: rgba(255, 247, 242, .9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; }
+.brand { font-family: var(--f-display); font-weight: 800; font-stretch: 120%; text-decoration: none; letter-spacing: .02em; }
+.topbar nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.topbar nav a {
+  text-decoration: none; font-size: var(--step--1); font-weight: 600;
+  padding: 6px 12px; border-radius: 99px; white-space: nowrap; color: var(--ink-soft);
+}
+.topbar nav a:hover { background: var(--paper-2); color: var(--ink); }
+
+/* ---------- Portada ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(60% 70% at 0% 0%, rgba(55, 106, 98, .38), transparent 70%),
+    radial-gradient(50% 60% at 100% 10%, rgba(245, 177, 178, .55), transparent 70%),
+    radial-gradient(60% 60% at 85% 100%, rgba(211, 170, 224, .45), transparent 70%),
+    radial-gradient(50% 50% at 10% 100%, rgba(183, 222, 206, .6), transparent 70%),
+    var(--paper-2);
+}
+.hero .wrap { padding-block: clamp(48px, 9vw, 120px); display: grid; gap: clamp(28px, 4vw, 44px); }
+.logos { display: flex; align-items: center; gap: clamp(16px, 4vw, 40px); flex-wrap: wrap; }
+.logos .wild { width: clamp(118px, 18vw, 180px); }
+.logos .vox { width: clamp(150px, 24vw, 240px); }
+.logos .x { font-family: var(--f-display); font-weight: 300; font-size: var(--step-2); color: var(--ink-soft); }
+.hero h1 {
+  font-size: var(--step-4); font-weight: 900; font-stretch: 125%;
+  letter-spacing: -.02em; line-height: .95;
+}
+.hero h1 .ast { font-family: var(--f-serif); color: var(--coral); }
+.slogan { font-family: var(--f-serif); font-size: var(--step-3); line-height: 1.1; max-width: 18ch; color: var(--green); }
+.hero .lead { color: var(--ink-soft); }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; justify-self: start;
+  background: var(--ink); color: var(--paper); text-decoration: none;
+  font-weight: 700; font-stretch: 110%; padding: 14px 24px; border-radius: 99px; border: 0;
+  font: inherit; font-weight: 700; cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+.btn:hover { background: var(--green); transform: translateY(-2px); }
+.btn svg { width: 18px; height: 18px; }
+
+/* ---------- Secciones ---------- */
+section.slide { padding-block: clamp(64px, 10vw, 128px); }
+.slide-head { display: grid; gap: 14px; margin-bottom: clamp(28px, 5vw, 52px); }
+.slide.dark { background: var(--ink); color: var(--paper); }
+.slide.dark .eyebrow { color: var(--mint); }
+.slide.tint { background: var(--paper-2); }
+
+/* Más info (botón que despliega) */
+.more { margin-top: 28px; }
+.more > summary {
+  list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 700; font-stretch: 110%; color: var(--green);
+  border-bottom: 2px solid var(--wisteria); padding-bottom: 2px;
+}
+.more > summary::-webkit-details-marker { display: none; }
+.more > summary::after { content: "+"; font-size: 1.2em; line-height: 1; transition: transform .2s; }
+.more[open] > summary::after { transform: rotate(45deg); }
+.more[open] > summary .closed-label, .more:not([open]) > summary .open-label { display: none; }
+.more-body { padding-top: 22px; }
+.slide.dark .more > summary { color: var(--mint); }
+
+/* ---------- BANI ---------- */
+.bani { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.flip {
+  perspective: 1200px; background: none; border: 0; padding: 0; font: inherit; color: inherit;
+  cursor: pointer; text-align: left; min-height: 260px; width: 100%; min-width: 0;
+}
+.flip-inner {
+  position: relative; display: grid; height: 100%; min-height: 260px;
+  transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+}
+.flip.is-flipped .flip-inner { transform: rotateY(180deg); }
+.face {
+  grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 10px;
+}
+.face.front { background: var(--paper); color: var(--ink); justify-content: space-between; }
+.face.front .big { font-family: var(--f-serif); font-size: clamp(4rem, 3rem + 4vw, 6.5rem); line-height: .9; }
+.face.front .en { display: block; font-weight: 700; font-stretch: 105%; font-size: var(--step-1); overflow-wrap: anywhere; }
+.face.front .hint { font-size: var(--step--1); color: var(--ink-soft); display: flex; align-items: center; gap: 6px; }
+.face.back { transform: rotateY(180deg); color: var(--ink); }
+.face.back .es { font-family: var(--f-serif); font-size: var(--step-2); line-height: 1.1; }
+.flip:nth-child(1) .back { background: var(--mint); }
+.flip:nth-child(2) .back { background: var(--blush); }
+.flip:nth-child(3) .back { background: var(--wisteria); }
+.flip:nth-child(4) .back { background: var(--paper-2); }
+.flip:nth-child(1) .big { color: var(--green); }
+.flip:nth-child(2) .big { color: var(--coral); }
+.flip:nth-child(3) .big { color: #8E5BA0; }
+.flip:nth-child(4) .big { color: var(--brick); }
+.cite { margin-top: 18px; font-size: var(--step--1); opacity: .75; }
+
+.thesis {
+  margin-top: clamp(48px, 7vw, 80px); display: grid; gap: 18px;
+  border-top: 1px solid rgba(255, 247, 242, .2); padding-top: clamp(32px, 5vw, 52px);
+}
+.thesis p.big { font-family: var(--f-display); font-weight: 700; font-stretch: 112%; font-size: var(--step-2); line-height: 1.15; max-width: 26ch; text-wrap: balance; }
+.thesis p.big em { font-style: normal; color: var(--blush); }
+.thesis p.sub { max-width: 52ch; opacity: .85; }
+
+/* ---------- Qué hacemos ---------- */
+.callout {
+  font-family: var(--f-serif); font-size: var(--step-2); line-height: 1.2; max-width: 30ch; color: var(--green);
+}
+.silos { display: grid; gap: 10px; margin-top: 8px; }
+.silo {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px 20px;
+  padding: 14px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px;
+}
+.tag {
+  font-size: var(--step--1); font-weight: 700; font-stretch: 112%; padding: 4px 12px; border-radius: 99px;
+  background: var(--mint); color: var(--ink); white-space: nowrap;
+}
+.tag.b { background: var(--blush); }
+.gap-mark { display: inline-flex; align-items: center; gap: 2px; color: var(--coral); font-weight: 900; letter-spacing: -.1em; }
+.silo .pair { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.silo p { color: var(--ink-soft); font-size: var(--step--1); }
+
+.layers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.layer { padding: 24px; border-radius: var(--radius); display: grid; gap: 10px; align-content: start; }
+.layer:nth-child(1) { background: var(--mint); }
+.layer:nth-child(2) { background: var(--green); color: var(--paper); }
+.layer:nth-child(3) { background: var(--ink); color: var(--paper); }
+.layer .n { font-size: var(--step--1); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; opacity: .8; }
+.layer h3 { font-size: var(--step-1); }
+.layer p { font-size: var(--step--1); line-height: 1.55; }
+
+.subhead { font-size: var(--step-1); font-weight: 700; font-stretch: 112%; margin: clamp(40px, 6vw, 64px) 0 18px; }
+
+/* ---------- Productos ---------- */
+.products { display: grid; gap: 12px; }
+.product {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.product:hover { border-color: var(--green); }
+.product[open] { box-shadow: 0 18px 40px -24px rgba(0, 55, 49, .45); border-color: var(--green); }
+.product > summary {
+  list-style: none; cursor: pointer;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px 20px; align-items: center;
+  padding: 22px clamp(18px, 3vw, 30px);
+}
+.product > summary::-webkit-details-marker { display: none; }
+.product .num {
+  font-family: var(--f-serif); font-size: var(--step-3); line-height: 1; color: var(--green);
+  min-width: 1.4ch;
+}
+.product .titles { display: grid; gap: 4px; min-width: 0; }
+.product h3 { font-size: var(--step-1); }
+.product .hook { color: var(--ink-soft); }
+.product .chip {
+  display: inline-block; justify-self: start; margin-top: 6px;
+  font-size: var(--step--1); font-weight: 600; padding: 3px 10px; border-radius: 99px;
+  background: var(--paper-2); color: var(--brick);
+}
+.plus {
+  width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--ink);
+  display: grid; place-items: center; transition: transform .25s ease, background .2s ease, color .2s;
+}
+.plus svg { width: 16px; height: 16px; }
+.product[open] .plus { transform: rotate(45deg); background: var(--ink); color: var(--paper); }
+
+.product-body {
+  padding: 4px clamp(18px, 3vw, 30px) 30px;
+  padding-left: clamp(18px, calc(3vw + 1.4ch + 20px + 1.6rem), 120px);
+  display: grid; gap: 26px;
+}
+.product-body .prose { color: var(--ink); }
+.solves {
+  background: var(--paper-2); border-radius: 14px; padding: 18px 20px; display: grid; gap: 8px; max-width: 72ch;
+}
+.solves .eyebrow { color: var(--brick); }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 40px; }
+.fact { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.fact .eyebrow { border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.fact.span { grid-column: 1 / -1; }
+ul.clean { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+ul.clean li { position: relative; padding-left: 20px; }
+ul.clean li::before {
+  content: "*"; position: absolute; left: 0; top: -.05em;
+  font-family: var(--f-serif); color: var(--coral); font-size: 1.15em;
+}
+.cols-2 { display: block; columns: 2 260px; column-gap: 40px; }
+.cols-2 li { break-inside: avoid; margin-bottom: 8px; }
+.list-label { font-weight: 700; margin-bottom: 6px; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.flow span {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 99px;
+  padding: 5px 12px; font-size: var(--step--1); font-weight: 600;
+}
+.flow i { font-style: normal; color: var(--coral); font-weight: 800; }
+
+.product.custom { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.product.custom .num { color: var(--wisteria); }
+.product.custom .hook { color: var(--mint); }
+
+/* ---------- Cierre ---------- */
+.closing { text-align: left; }
+.closing .wrap { display: grid; gap: 28px; }
+.closing .callout-big {
+  font-family: var(--f-serif); font-size: var(--step-3); line-height: 1.12; max-width: 22ch; color: var(--paper);
+}
+.closing .callout-big em { font-style: normal; color: var(--blush); }
+.closing .logos-light {
+  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+  background: var(--paper); border-radius: var(--radius); padding: 22px 28px; justify-self: start;
+}
+.closing .logos-light .wild { width: 120px; }
+.closing .logos-light .vox { width: 160px; }
+footer { padding-block: 26px; font-size: var(--step--1); color: var(--ink-soft); }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .bani { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .layers { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .topbar nav { display: none; }
+  .flip, .flip-inner { min-height: 220px; }
+  .facts { grid-template-columns: 1fr; }
+  .product-body { padding-left: clamp(18px, 3vw, 30px); }
+  .product > summary { grid-template-columns: minmax(0, 1fr) auto; }
+  .product .num { grid-column: 1 / -1; font-size: var(--step-2); }
+  .silo { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) {
+  .bani { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .flip-inner { transition: none; }
+  .btn, .plus, .more > summary::after { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     CÓMO EDITAR: todo el texto está acá abajo, en orden de aparición.
+     Cada sección empieza con un comentario grande (===== NOMBRE =====).
+     Ver wild-vox/README.md para más detalle.
+     ===================================================================== -->
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Wild Vox<span class="ast">*</span></a>
+    <nav aria-label="Secciones">
+      <a href="#porque">Por qué</a>
+      <a href="#que">Qué hacemos</a>
+      <a href="#como">Cómo lo hacemos</a>
+      <a href="#hablemos">Hablemos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== PORTADA ===================== -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="logos" aria-label="Wild Consultora y Vox Estrategias de Comunicación">
+      <img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240">
+      <span class="x" aria-hidden="true">+</span>
+      <img class="vox" src="img/vox.png" alt="Vox Estrategias de Comunicación" width="1129" height="383">
+    </div>
+    <h1>Wild Vox<span class="ast">*</span></h1>
+    <p class="slogan">Potenciá lo mejor de tu empresa.</p>
+    <p class="lead">La comunicación como activo estratégico. Una alianza entre Wild Consultora y Vox Estrategias de Comunicación.</p>
+    <a class="btn" href="#porque">Conocé la propuesta
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== POR QUÉ ===================== -->
+<section class="slide dark" id="porque">
+  <div class="wrap">
+    <div class="slide-head">
+      <p class="eyebrow">Por qué</p>
+      <h2>Vivimos en un mundo BANI</h2>
+      <p class="lead" style="opacity:.85">Un modelo que describe el contexto actual: caos, cambios veloces e incertidumbre post-pandemia. Tocá cada letra.</p>
+    </div>
+
+    <div class="bani">
+      <button class="flip" type="button" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="big">B</span><span><span class="en">Brittle</span><span class="hint">Tocá para ver ↻</span></span></span>
+          <span class="face back"><span class="es">Frágil</span><span>Sistemas que parecen sólidos pero se quiebran de golpe.</span></span>
+        </span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="big">A</span><span><span class="en">Anxious</span><span class="hint">Tocá para ver ↻</span></span></span>
+          <span class="face back"><span class="es">Ansioso</span><span>La sobreinformación y la incertidumbre generan angustia y parálisis.</span></span>
+        </span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="big">N</span><span><span class="en">Non-linear</span><span class="hint">Tocá para ver ↻</span></span></span>
+          <span class="face back"><span class="es">No lineal</span><span>Causas y efectos desproporcionados o desfasados en el tiempo.</span></span>
+        </span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="big">I</span><span><span class="en">Incomprehensible</span><span class="hint">Tocá para ver ↻</span></span></span>
+          <span class="face back"><span class="es">Incomprensible</span><span>Más datos no garantizan más comprensión.</span></span>
+        </span>
+      </button>
+    </div>
+    <p class="cite">Modelo BANI: Jamais Cascio, Institute for the Future (IFTF), 2020.</p>
+
+    <div class="thesis">
+      <p class="big">En este contexto, la comunicación se vuelve <em>una competencia clave para liderar y operar.</em></p>
+      <p class="sub">Quien comunica mejor, más claro, de manera más adecuada y a tiempo desarrolla una ventaja competitiva.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUÉ HACEMOS ===================== -->
+<section class="slide" id="que">
+  <div class="wrap">
+    <div class="slide-head">
+      <p class="eyebrow">Qué hacemos</p>
+      <h2>Transformamos la comunicación en un activo estratégico</h2>
+    </div>
+    <p class="callout">Cada área de tu empresa genera conocimiento, datos y experiencias que otras áreas necesitan.</p>
+
+    <details class="more">
+      <summary><span class="closed-label">Leer más</span><span class="open-label">Leer menos</span></summary>
+      <div class="more-body prose">
+        <p>En una empresa, cada área genera permanentemente conocimiento, datos, experiencias e información que son relevantes para otras áreas y también para públicos externos.</p>
+        <p>La propuesta parte de entender la comunicación no solo como una habilidad o un conjunto de canales, sino como un <strong>sistema de circulación de información</strong> dentro de la organización, que bien gestionado se convierte en un activo estratégico.</p>
+      </div>
+    </details>
+
+    <h3 class="subhead">¿Qué problemas resuelve? Muchas veces esa información queda encapsulada.</h3>
+    <div class="silos">
+      <div class="silo">
+        <span class="pair"><span class="tag">Comercial</span><span class="gap-mark" aria-label="no se conecta con">–/–</span><span class="tag b">Producto</span></span>
+        <p>Comercial desconoce lo que está desarrollando Producto.</p>
+      </div>
+      <div class="silo">
+        <span class="pair"><span class="tag">Marketing</span><span class="gap-mark" aria-label="no se conecta con">–/–</span><span class="tag b">Atención al Cliente</span></span>
+        <p>Marketing no accede a información que surge de Atención al Cliente.</p>
+      </div>
+      <div class="silo">
+        <span class="pair"><span class="tag">Comunicación</span><span class="gap-mark" aria-label="no se conecta con">–/–</span><span class="tag b">Negocio</span></span>
+        <p>Comunicación desconoce tendencias o casos detectados por el negocio.</p>
+      </div>
+      <div class="silo">
+        <span class="pair"><span class="tag">RRHH</span><span class="gap-mark" aria-label="no se conecta con">–/–</span><span class="tag b">Cultura y marca empleadora</span></span>
+        <p>RRHH no tiene visibilidad sobre experiencias que podrían fortalecer la cultura y la marca empleadora.</p>
+      </div>
+    </div>
+    <p class="cite" style="color:var(--ink-soft)">Entre otras problemáticas más complejas y particulares de cada organización.</p>
+
+    <h3 class="subhead">Objetivos, en tres capas de profundidad</h3>
+    <div class="layers">
+      <div class="layer">
+        <span class="n">Primera capa</span>
+        <h3>Diagnosticar</h3>
+        <p>Entender cómo circula la información dentro de la organización.</p>
+      </div>
+      <div class="layer">
+        <span class="n">Segunda capa</span>
+        <h3>Detectar</h3>
+        <p>Encontrar dónde se interrumpe esa circulación.</p>
+      </div>
+      <div class="layer">
+        <span class="n">Tercera capa</span>
+        <h3>Conectar</h3>
+        <p>Identificar a las personas que pueden funcionar como conectores en cada área y construir mecanismos que transformen ese conocimiento en un activo para las personas, el negocio y la reputación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CÓMO LO HACEMOS (PRODUCTOS) =====================
+     Cada producto es un bloque <details class="product">.
+     - Lo que está en <summary> se ve siempre (número, título, frase, chip).
+     - Lo que está en <div class="product-body"> se ve al hacer clic.
+     ====================================================================== -->
+<section class="slide tint" id="como">
+  <div class="wrap">
+    <div class="slide-head">
+      <p class="eyebrow">Cómo lo hacemos</p>
+      <h2>Seis formas de trabajar con tu empresa</h2>
+      <p class="lead" style="color:var(--ink-soft)">Hacé clic en cada una para ver el detalle.</p>
+    </div>
+
+    <div class="products">
+
+      <!-- ===== PRODUCTO 1 ===== -->
+      <details class="product">
+        <summary>
+          <span class="num">1</span>
+          <div class="titles">
+            <h3>Diagnóstico 360° de Comunicación</h3>
+            <span class="hook">El punto de partida para saber dónde estamos parados y definir cómo seguir.</span>
+            <span class="chip">2 a 4 semanas</span>
+          </div>
+          <span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="product-body">
+          <div class="prose">
+            <p>Relevamiento del estado de la comunicación <strong>como herramienta, habilidad y activo estratégico de la organización</strong>: madurez y adhesión a las herramientas utilizadas, nivel instalado de la comunicación como habilidad, prácticas vigentes, impacto en el clima laboral, habilidad de los líderes y cómo circula la información entre las áreas.</p>
+            <p>No solo busca detectar problemas comunicacionales: también encuentra información, conocimiento y oportunidades que hoy quedan encapsulados en determinadas áreas (silos) y podrían generar valor para el resto de la organización o para sus públicos externos.</p>
+          </div>
+          <div class="solves">
+            <p class="eyebrow">Problema que resuelve</p>
+            <p>Evita invertir sin haber diagnosticado el problema real. Detecta fallas de comunicación y también el conocimiento existente que no se está aprovechando, para adaptar las soluciones a las necesidades reales de la organización.</p>
+          </div>
+          <div class="facts">
+            <div class="fact span">
+              <p class="eyebrow">Temas incluidos</p>
+              <ul class="clean cols-2">
+                <li>Encuestas de clima y comunicación.</li>
+                <li>Entrevistas a referentes clave y observación de dinámicas reales.</li>
+                <li>Mapa de canales formales e informales.</li>
+                <li>Cuellos de botella entre áreas, de liderazgo a equipos y hacia afuera.</li>
+                <li>Relevamiento de herramientas y procesos comunicacionales.</li>
+                <li>Qué información genera cada área, cuál recibe y cuál necesita pero no recibe.</li>
+                <li>Conocimientos, datos, experiencias o proyectos concentrados en determinadas áreas.</li>
+                <li>Hitos que deberían conocer otras áreas y hoy no circulan.</li>
+                <li>Información con potencial para públicos externos: clientes, proveedores, medios, partners, comunidad, potenciales empleados.</li>
+                <li>Personas que ya funcionan informalmente como conectores.</li>
+                <li>Historias, datos, tendencias y expertise interno desaprovechados comunicacionalmente.</li>
+              </ul>
+            </div>
+            <div class="fact span">
+              <p class="eyebrow">Entregables</p>
+              <p>Diagnóstico general. Opcional: <strong>Mapa de flujos de información y oportunidades de comunicación</strong>, que permite visualizar:</p>
+              <div class="flow" aria-label="Recorrido de la información">
+                <span>Información que produce cada área</span><i>→</i>
+                <span>Quién debería conocerla</span><i>→</i>
+                <span>Quién la recibe hoy</span><i>→</i>
+                <span>Dónde se interrumpe</span><i>→</i>
+                <span>Potencial interno</span><i>→</i>
+                <span>Potencial externo</span>
+              </div>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Metodología</p>
+              <p>Relevamiento de 2 a 4 semanas con encuestas, entrevistas y observación. Informe con diagnóstico, mapa de circulación de información, oportunidades detectadas y recomendaciones priorizadas.</p>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Para quién</p>
+              <p>Dirección General o áreas específicas (Comercial, RRHH) que detectan problemas de coordinación, comunicación o alineación, pero no tienen claro dónde se originan ni cómo abordarlos.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ===== PRODUCTO 2 ===== -->
+      <details class="product">
+        <summary>
+          <span class="num">2</span>
+          <div class="titles">
+            <h3>Escuela de Comunicación para Líderes y Agentes de Comunicación</h3>
+            <span class="hook">La comunicación no es un talento innato: se entrena como competencia de liderazgo.</span>
+            <span class="chip">Taller único o programa</span>
+          </div>
+          <span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="product-body">
+          <div class="prose">
+            <p>Formación para mandos medios y altos enfocada en dejar de considerar a la comunicación como un talento innato, para que <strong>pueda entrenarse como una competencia de liderazgo</strong>.</p>
+            <p>Incluye la identificación y formación de <strong>Agentes o Conectores de Comunicación</strong> en las distintas áreas. No tienen que ser los responsables de cada área: pueden ser personas con capacidad para detectar información relevante, relacionarse de forma transversal, entender qué le sirve a otros sectores y funcionar como puente.</p>
+          </div>
+          <div class="solves">
+            <p class="eyebrow">Problema que resuelve</p>
+            <p>Líderes que llegan a posiciones de conducción por expertise técnico y necesitan incorporar habilidades para comunicar. También instrucciones mal dadas, feedback que no baja y conflictos evitados en vez de gestionados.</p>
+          </div>
+          <div class="facts">
+            <div class="fact">
+              <p class="eyebrow">Temas para líderes</p>
+              <ul class="clean">
+                <li>Comunicación verbal, corporal y escucha activa.</li>
+                <li>Estilos de comunicación y herramientas para leer al otro.</li>
+                <li>Oratoria y manejo de instancias de alta exposición.</li>
+                <li>Devoluciones de desempeño y conversaciones difíciles.</li>
+                <li>Comunicación de cambios.</li>
+                <li>Presentaciones y conferencias.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Temas para Agentes de Comunicación</p>
+              <ul class="clean">
+                <li>Cómo identificar información relevante dentro de un área.</li>
+                <li>Cómo detectar qué información necesita conocer otra área.</li>
+                <li>Síntesis y traducción de información técnica o compleja.</li>
+                <li>Distinguir información confidencial de información compartible.</li>
+                <li>Detectar tendencias, casos, datos, expertise e historias.</li>
+                <li>Qué convierte una información interna en una oportunidad de comunicación.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Metodología</p>
+              <p>Taller único o programa de varios encuentros según necesidad. Muy vivencial: role-play, casos reales del equipo y feedback en el momento.</p>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Para quién</p>
+              <p>Mandos medios y altos, y personas de distintas áreas con potencial para funcionar como conectores de información.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ===== PRODUCTO 3 ===== -->
+      <details class="product">
+        <summary>
+          <span class="num">3</span>
+          <div class="titles">
+            <h3>Laboratorio de Soluciones Integradas</h3>
+            <span class="hook">Áreas que trabajan en silos resuelven juntas un problema real del negocio.</span>
+            <span class="chip">Medio día o jornada · 6 a 15 personas</span>
+          </div>
+          <span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="product-body">
+          <div class="prose">
+            <p>Un espacio de trabajo real entre áreas que normalmente no se hablan, usando la comunicación como método para resolver un problema concreto del negocio.</p>
+            <p>Además de resolver el problema, instala una pregunta en la dinámica de la organización: <strong>¿Qué información tengo yo que necesita otra área para hacer mejor su trabajo?</strong></p>
+          </div>
+          <div class="solves">
+            <p class="eyebrow">Problema que resuelve</p>
+            <p>Ineficiencias por falta de comunicación o de trabajo colaborativo entre áreas, que impactan en el negocio o en el cliente final. Los silos no se resuelven cambiando un organigrama o sumando reuniones: se resuelven cuando los equipos trabajan juntos alrededor de un problema real y entienden qué información necesitan compartir.</p>
+          </div>
+          <div class="facts">
+            <div class="fact span">
+              <p class="eyebrow">Por ejemplo</p>
+              <div class="flow">
+                <span>Producto lanza una nueva solución</span><i>→</i>
+                <span>¿Quién necesita saberlo?</span><i>→</i>
+                <span>¿Cuándo? ¿Para qué?</span><i>→</i>
+                <span>¿Qué necesita Comercial?</span><i>→</i>
+                <span>¿Y Atención al Cliente?</span><i>→</i>
+                <span>¿Y Marketing?</span><i>→</i>
+                <span>¿Hay oportunidad de comunicación externa?</span><i>→</i>
+                <span>¿Quién activa cada instancia?</span>
+              </div>
+            </div>
+            <div class="fact span">
+              <p class="eyebrow">Temas incluidos</p>
+              <ul class="clean cols-2">
+                <li>Diagnóstico rápido de dónde se traba la comunicación entre áreas.</li>
+                <li>Dinámica estructurada y facilitada de resolución colaborativa.</li>
+                <li>Trabajo sobre un problema real de la empresa, no un caso ficticio.</li>
+                <li>Qué información tiene cada área y cuál necesitan las otras.</li>
+                <li>Los momentos en que debería producirse el intercambio.</li>
+                <li>Definición de responsables y mecanismos de circulación.</li>
+                <li>Posible impacto externo de esa información.</li>
+                <li>Cierre con solución construida en la sala y un método para repetir la dinámica sin facilitador externo.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Metodología</p>
+              <p>Taller intensivo de medio día o jornada completa, con seguimiento de la implementación. Grupos interáreas de 6 a 15 personas.</p>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Para quién</p>
+              <p>Equipos convocados por Dirección o RRHH para resolver problemas de coordinación puntuales: Ventas-Operaciones, Comercial-Marketing, RRHH-Negocio, Producto-Atención al Cliente.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ===== PRODUCTO 4 ===== -->
+      <details class="product">
+        <summary>
+          <span class="num">4</span>
+          <div class="titles">
+            <h3>Arquitectura de Canales</h3>
+            <span class="hook">Qué se comunica, por qué canal y con qué frecuencia. Menos ruido, más efectividad.</span>
+            <span class="chip">Auditoría + taller + manual</span>
+          </div>
+          <span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="product-body">
+          <div class="prose">
+            <p>Rediseño concreto de qué se comunica por qué canal, para bajar el ruido y la sobrecarga de reuniones e información, y ser más efectivos según el público.</p>
+            <p>Amplía el concepto tradicional de arquitectura de canales para trabajar sobre una <strong>arquitectura de circulación de información</strong>.</p>
+          </div>
+          <div class="solves">
+            <p class="eyebrow">Problema que resuelve</p>
+            <p>La sobrecarga de comunicación (demasiados canales, mensajes duplicados, reuniones que podrían ser un mail) es tan dañina como la falta de comunicación, y casi nunca se aborda como un problema de diseño. Este producto ordena los canales y también los circuitos por los que circula el conocimiento.</p>
+          </div>
+          <div class="facts">
+            <div class="fact">
+              <p class="eyebrow">Temas incluidos</p>
+              <ul class="clean">
+                <li>Mapa y auditoría de canales actuales: mail, reuniones, Slack/Teams, cartelera, town hall.</li>
+                <li>Relevamiento de espacios y públicos.</li>
+                <li>Qué tipo de mensaje va por qué canal y con qué frecuencia.</li>
+                <li>Rediseño de reuniones recurrentes: cuáles quedan, cuáles se eliminan, cuáles cambian de formato.</li>
+                <li>Manual de uso interno de canales, para que quede como norma y no como recomendación.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Red de Agentes de Comunicación</p>
+              <p class="list-label">Cada área puede tener una persona que detecte y comparta periódicamente:</p>
+              <ul class="clean">
+                <li>Qué está haciendo el área y sus próximos hitos.</li>
+                <li>Proyectos y lanzamientos.</li>
+                <li>Información que otras áreas deberían conocer.</li>
+                <li>Tendencias, casos de clientes y datos relevantes.</li>
+                <li>Posibles historias.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Metodología</p>
+              <p>Diagnóstico corto (auditoría + entrevistas), taller de rediseño con el equipo de liderazgo o de Comunicación y entrega del manual de canales. Puede sumar la creación y el acompañamiento inicial de la Red de Agentes de Comunicación.</p>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Para quién</p>
+              <p>Empresas con sobrecarga de reuniones o información, que crecieron rápido y multiplicaron canales sin criterio, con equipos distribuidos geográficamente o con múltiples negocios, que tienen dificultades para compartir información de forma transversal.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ===== PRODUCTO 5 ===== -->
+      <details class="product">
+        <summary>
+          <span class="num">5</span>
+          <div class="titles">
+            <h3>Comunicación &amp; Marca Empleadora</h3>
+            <span class="hook">Acortar la distancia entre lo que la empresa es, lo que se vive adentro y lo que cuenta afuera.</span>
+            <span class="chip">Consultoría a medida</span>
+          </div>
+          <span class="plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="product-body">
+          <div class="prose">
+            <p>Diseño de la comunicación interna como <strong>experiencia de empleado</strong>, para reforzar cultura y marca empleadora en cada etapa del ciclo de vida del colaborador.</p>
+            <p>Suma la posibilidad de transformar historias, conocimiento y experiencias internas en activos de reputación externa.</p>
+          </div>
+          <div class="solves">
+            <p class="eyebrow">Problema que resuelve</p>
+            <p>La comunicación interna suele ser reactiva y desconectada (un mail acá, un evento allá) sin construir cultura ni pertenencia. Muchas organizaciones proyectan una marca empleadora sin correlato interno o, al revés, tienen historias valiosas puertas adentro que nunca capitalizan afuera.</p>
+          </div>
+          <div class="facts">
+            <div class="fact">
+              <p class="eyebrow">Experiencia de empleado</p>
+              <ul class="clean">
+                <li>Mapeo del employee journey y momentos clave: onboarding, desarrollo, promociones, cambios y desvinculación.</li>
+                <li>Mensajes y tono por etapa.</li>
+                <li>Coherencia entre lo que se comunica puertas adentro y la marca empleadora que se proyecta afuera.</li>
+                <li>Indicadores para medir si la comunicación interna funciona.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Historias que se vuelven reputación</p>
+              <ul class="clean">
+                <li>Historias internas que representan la cultura.</li>
+                <li>Especialistas y referentes internos.</li>
+                <li>Historias de carrera y desarrollo.</li>
+                <li>Proyectos de innovación y experiencias interáreas.</li>
+                <li>Conocimiento técnico y expertise interno.</li>
+                <li>Su transformación en Employer Branding, PR, LinkedIn, contenidos corporativos, eventos, speaking opportunities y comunicación institucional.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Metodología</p>
+              <p>Consultoría a medida: diagnóstico, diseño de estrategia y acompañamiento en la implementación. Trabajo conjunto con RRHH, Comunicación y Marketing.</p>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Para quién</p>
+              <p>Empresas medianas y grandes con RRHH estructurado, que compiten por talento y necesitan una marca empleadora consistente.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ===== PRODUCTO 6 ===== -->
+      <details class="product custom">
+        <summary>
+          <span class="num">6</span>
+          <div class="titles">
+            <h3>Soluciones a medida</h3>
+            <span class="hook">Conociendo tu empresa, hacemos un mix y aplicamos lo que necesite.</span>
+          </div>
+          <span class="plus" aria-hidden="true" style="border-color:currentColor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </summary>
+        <div class="product-body">
+          <p class="prose">Cada organización tiene problemáticas propias. Combinamos diagnóstico, formación, laboratorios, arquitectura de canales y marca empleadora según lo que tu empresa necesite.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CIERRE ===================== -->
+<section class="slide dark closing" id="hablemos">
+  <div class="wrap">
+    <p class="eyebrow">Hablemos</p>
+    <p class="callout-big">Transformemos la comunicación de tu empresa en <em>un activo estratégico que potencie tu negocio.</em></p>
+    <div class="logos-light">
+      <img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240">
+      <img class="vox" src="img/vox.png" alt="Vox Estrategias de Comunicación" width="1129" height="383">
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Wild Vox<span class="ast">*</span> · Wild Consultora + Vox Estrategias de Comunicación</span>
+    <span>Potenciá lo mejor de tu empresa.</span>
+  </div>
+</footer>
+
+<script>
+  // Tarjetas BANI: se dan vuelta al tocarlas
+  document.querySelectorAll('.flip').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var on = card.classList.toggle('is-flipped');
+      card.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  });
+</script>
+</body>
+</html>
