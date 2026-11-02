@@ -224,15 +224,6 @@ section.slide { padding-block: clamp(64px, 10vw, 128px); }
 .silo .pair { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .silo p { color: var(--ink-soft); font-size: var(--step--1); }
 
-.layers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.layer { padding: 24px; border-radius: var(--radius); display: grid; gap: 10px; align-content: start; }
-.layer:nth-child(1) { background: var(--mint); }
-.layer:nth-child(2) { background: var(--green); color: var(--paper); }
-.layer:nth-child(3) { background: var(--ink); color: var(--paper); }
-.layer .n { font-size: var(--step--1); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; opacity: .8; }
-.layer h3 { font-size: var(--step-1); }
-.layer p { font-size: var(--step--1); line-height: 1.55; }
-
 .subhead { font-size: var(--step-1); font-weight: 700; font-stretch: 112%; margin: clamp(40px, 6vw, 64px) 0 18px; }
 
 /* ---------- Productos ---------- */
@@ -336,6 +327,13 @@ footer { padding-block: 26px; font-size: var(--step--1); color: var(--ink-soft);
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 
+.intro-text {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px clamp(28px, 5vw, 64px);
+  margin-top: clamp(28px, 4vw, 44px); padding-top: clamp(22px, 3vw, 32px); border-top: 1px solid var(--line);
+  font-size: var(--step-1); line-height: 1.5;
+}
+@media (max-width: 760px) { .intro-text { grid-template-columns: 1fr; } }
+
 /* ---------- Fotos (Pexels) ----------
    Tratamiento: blanco y negro teñido con los colores de marca + granulado (manual Wild). */
 .bg-photo { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -373,7 +371,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .bani { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .layers { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .topbar nav { display: none; }
@@ -496,13 +493,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       <figure class="duo"><img src="https://images.pexels.com/photos/8107287/pexels-photo-8107287.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Persona conversando en una reunión" loading="lazy" onerror="this.parentNode.classList.add('img-off')"></figure>
     </div>
 
-    <details class="more">
-      <summary><span class="closed-label">Leer más</span><span class="open-label">Leer menos</span></summary>
-      <div class="more-body prose">
-        <p>En una empresa, cada área genera permanentemente conocimiento, datos, experiencias e información que son relevantes para otras áreas y también para públicos externos.</p>
-        <p>La propuesta parte de entender la comunicación no solo como una habilidad o un conjunto de canales, sino como un <strong>sistema de circulación de información</strong> dentro de la organización, que bien gestionado se convierte en un activo estratégico.</p>
-      </div>
-    </details>
+    <div class="intro-text">
+      <p>En una empresa, cada área genera permanentemente conocimiento, datos, experiencias e información que son relevantes para otras áreas y también para públicos externos.</p>
+      <p>La propuesta parte de entender la comunicación no solo como una habilidad o un conjunto de canales, sino como un <strong>sistema de circulación de información</strong> dentro de la organización, que bien gestionado se convierte en un activo estratégico.</p>
+    </div>
 
     <h3 class="subhead">¿Qué problemas resuelve? Muchas veces esa información queda encapsulada.</h3>
     <div class="silos">
@@ -524,25 +518,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       </div>
     </div>
     <p class="cite" style="color:var(--ink-soft)">Entre otras problemáticas más complejas y particulares de cada organización.</p>
-
-    <h3 class="subhead">Objetivos, en tres capas de profundidad</h3>
-    <div class="layers">
-      <div class="layer">
-        <span class="n">Primera capa</span>
-        <h3>Diagnosticar</h3>
-        <p>Entender cómo circula la información dentro de la organización.</p>
-      </div>
-      <div class="layer">
-        <span class="n">Segunda capa</span>
-        <h3>Detectar</h3>
-        <p>Encontrar dónde se interrumpe esa circulación.</p>
-      </div>
-      <div class="layer">
-        <span class="n">Tercera capa</span>
-        <h3>Conectar</h3>
-        <p>Identificar a las personas que pueden funcionar como conectores en cada área y construir mecanismos que transformen ese conocimiento en un activo para las personas, el negocio y la reputación.</p>
-      </div>
-    </div>
   </div>
 </section>
 
