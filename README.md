@@ -54,7 +54,7 @@ Tipografías (Google Fonts, sustitutos libres de las de marca):
 
 ## Publicación
 
-Dirección pública: https://wild-consultora.github.io/wildvox/
+Dirección pública: https://wildvox.github.io/comunicacion-estrategica/
 
 La página se publica gratis con **GitHub Pages** desde la rama `main` (carpeta raíz).
 Cada cambio guardado en `main` se ve en la web en 1 o 2 minutos.
