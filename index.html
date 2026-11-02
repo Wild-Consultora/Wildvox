@@ -306,6 +306,10 @@ ul.clean li::before {
 .product.custom .product-body .prose { color: var(--paper); }
 .product.custom .fact .eyebrow { border-bottom-color: rgba(255, 247, 242, .2); }
 .product.custom ul.clean li::before { color: var(--blush); }
+ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 40px; }
+ol.steps li { counter-increment: step; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); align-items: baseline; }
+ol.steps li::before { content: counter(step); font-family: var(--f-serif); font-size: 1.6em; line-height: 1; color: var(--wisteria); }
+@media (max-width: 640px) { ol.steps { grid-template-columns: 1fr; } }
 
 /* ---------- Cierre ---------- */
 .closing { text-align: left; }
@@ -800,18 +804,17 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         </summary>
         <div class="product-body">
           <div class="prose">
-            <p>No hay dos organizaciones iguales. Cada una tiene su cultura, su momento, su estructura y sus problemáticas propias. Por eso, además de los productos anteriores, armamos <strong>propuestas a medida</strong>: combinamos diagnóstico, formación, laboratorios, arquitectura de canales y marca empleadora en el orden y la intensidad que tu empresa necesite.</p>
-            <p>Partimos siempre de una conversación para entender el desafío y, a partir de ahí, diseñamos juntos el recorrido.</p>
+            <p>Cada organización tiene su cultura, su momento y sus problemáticas. Por eso combinamos los productos en el orden y la intensidad que tu empresa necesite. Siempre partimos de una conversación.</p>
           </div>
           <div class="facts">
             <div class="fact span">
-              <p class="eyebrow">Cómo armamos la propuesta</p>
-              <ul class="clean">
-                <li><strong>Escuchamos.</strong> Una primera conversación con Dirección, RRHH o Comunicación para entender qué está pasando y qué se quiere lograr.</li>
-                <li><strong>Diagnosticamos.</strong> Con el Diagnóstico 360° completo o con un relevamiento más corto, según el caso.</li>
-                <li><strong>Combinamos.</strong> Elegimos qué productos aplicar, en qué orden y con qué equipos.</li>
-                <li><strong>Acompañamos.</strong> Seguimos la implementación para que los cambios queden instalados en la organización.</li>
-              </ul>
+              <p class="eyebrow">Cómo armamos la propuesta, en cuatro pasos</p>
+              <ol class="steps">
+                <li><span><strong>Escuchamos:</strong> una primera conversación con Dirección, RRHH o Comunicación.</span></li>
+                <li><span><strong>Diagnosticamos:</strong> con el Diagnóstico 360° completo o con un relevamiento más corto.</span></li>
+                <li><span><strong>Combinamos:</strong> qué productos aplicar, en qué orden y con qué equipos.</span></li>
+                <li><span><strong>Acompañamos:</strong> seguimos la implementación para que los cambios queden instalados.</span></li>
+              </ol>
             </div>
           </div>
         </div>
