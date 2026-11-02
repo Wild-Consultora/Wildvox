@@ -335,6 +335,41 @@ ol.steps li::before { content: counter(step); font-family: var(--f-serif); font-
 footer { padding-block: 26px; font-size: var(--step--1); color: var(--ink-soft); }
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
+
+/* ---------- Fotos (Pexels) ----------
+   Tratamiento: blanco y negro teñido con los colores de marca + granulado (manual Wild). */
+.bg-photo { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bg-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: grayscale(1) contrast(1.05);
+  -webkit-mask-image: linear-gradient(to left, #000 25%, transparent 80%);
+          mask-image: linear-gradient(to left, #000 25%, transparent 80%);
+}
+.hero .bg-photo img { mix-blend-mode: multiply; opacity: .30; }
+.slide.dark .bg-photo img { mix-blend-mode: luminosity; opacity: .16; }
+.closing .bg-photo img { opacity: .22; }
+.bg-photo::after, .duo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.img-off { display: none !important; }
+.hero, .slide.dark { position: relative; overflow: hidden; }
+.hero > .wrap, .slide.dark > .wrap { position: relative; z-index: 1; }
+
+.duo { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--mint); margin: 0; }
+.duo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.1); mix-blend-mode: multiply; opacity: .85; }
+.duo.blush { background: var(--blush); }
+.duo.wis { background: var(--wisteria); }
+
+.intro-row { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; }
+.intro-row .duo { aspect-ratio: 4 / 3; }
+.band { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: clamp(28px, 5vw, 48px); }
+.band .duo { aspect-ratio: 16 / 9; }
+@media (max-width: 760px) {
+  .intro-row { grid-template-columns: 1fr; }
+  .band { grid-template-columns: 1fr 1fr; gap: 10px; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .bani { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -383,6 +418,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <!-- ===================== PORTADA ===================== -->
 <section class="hero" id="inicio">
+  <!-- Foto de fondo (Pexels 9275222) -->
+  <div class="bg-photo" aria-hidden="true"><img src="https://images.pexels.com/photos/9275222/pexels-photo-9275222.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" alt="" onerror="this.parentNode.classList.add('img-off')"></div>
   <div class="wrap">
     <div class="logos" aria-label="Wild Consultora y Vox – Estrategias de Comunicación">
       <a class="logo-link" href="https://www.wildconsultora.com" target="_blank" rel="noopener" title="Ir a wildconsultora.com"><img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240"></a>
@@ -402,6 +439,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <!-- ===================== POR QUÉ ===================== -->
 <section class="slide dark" id="porque">
+  <!-- Foto de fondo (Pexels 11329860) -->
+  <div class="bg-photo" aria-hidden="true"><img src="https://images.pexels.com/photos/11329860/pexels-photo-11329860.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" alt="" loading="lazy" onerror="this.parentNode.classList.add('img-off')"></div>
   <div class="wrap">
     <div class="slide-head">
       <p class="eyebrow">Por qué</p>
@@ -451,7 +490,11 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       <p class="eyebrow">Qué hacemos</p>
       <h2>Transformamos la comunicación en un activo estratégico</h2>
     </div>
-    <p class="callout">Cada área de tu empresa genera conocimiento, datos y experiencias que otras áreas necesitan.</p>
+    <div class="intro-row">
+      <p class="callout">Cada área de tu empresa genera conocimiento, datos y experiencias que otras áreas necesitan.</p>
+      <!-- Foto (Pexels 8107287) -->
+      <figure class="duo"><img src="https://images.pexels.com/photos/8107287/pexels-photo-8107287.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Persona conversando en una reunión" loading="lazy" onerror="this.parentNode.classList.add('img-off')"></figure>
+    </div>
 
     <details class="more">
       <summary><span class="closed-label">Leer más</span><span class="open-label">Leer menos</span></summary>
@@ -514,6 +557,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       <p class="eyebrow">Cómo lo hacemos</p>
       <h2>Seis formas de trabajar con tu empresa</h2>
       <p class="lead" style="color:var(--ink-soft)">Hacé clic en cada una para ver el detalle.</p>
+    </div>
+
+    <!-- Franja de fotos (Pexels 4106707 y 8015666) -->
+    <div class="band" aria-hidden="true">
+      <figure class="duo blush"><img src="https://images.pexels.com/photos/4106707/pexels-photo-4106707.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy" onerror="this.parentNode.classList.add('img-off')"></figure>
+      <figure class="duo"><img src="https://images.pexels.com/photos/8015666/pexels-photo-8015666.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy" onerror="this.parentNode.classList.add('img-off')"></figure>
     </div>
 
     <div class="products">
@@ -834,6 +883,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <!-- ===================== CIERRE ===================== -->
 <section class="slide dark closing" id="hablemos">
+  <!-- Foto de fondo (Pexels 33970) -->
+  <div class="bg-photo" aria-hidden="true"><img src="https://images.pexels.com/photos/33970/pexels-photo-33970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600" alt="" loading="lazy" onerror="this.parentNode.classList.add('img-off')"></div>
   <div class="wrap">
     <p class="eyebrow">Hablemos</p>
     <p class="callout-big">Transformemos la comunicación de tu empresa en <em>un activo estratégico que potencie tu negocio.</em></p>
