@@ -302,6 +302,10 @@ ul.clean li::before {
 .product.custom { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .product.custom .num { color: var(--wisteria); }
 .product.custom .hook { color: var(--mint); }
+.product.custom .eyebrow { color: var(--mint); }
+.product.custom .product-body .prose { color: var(--paper); }
+.product.custom .fact .eyebrow { border-bottom-color: rgba(255, 247, 242, .2); }
+.product.custom ul.clean li::before { color: var(--blush); }
 
 /* ---------- Cierre ---------- */
 .closing { text-align: left; }
@@ -795,7 +799,33 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
           <span class="plus" aria-hidden="true" style="border-color:currentColor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
         </summary>
         <div class="product-body">
-          <p class="prose">Cada organización tiene problemáticas propias. Combinamos diagnóstico, formación, laboratorios, arquitectura de canales y marca empleadora según lo que tu empresa necesite.</p>
+          <div class="prose">
+            <p>No hay dos organizaciones iguales. Cada una tiene su cultura, su momento, su estructura y sus problemáticas propias. Por eso, además de los productos anteriores, armamos <strong>propuestas a medida</strong>: combinamos diagnóstico, formación, laboratorios, arquitectura de canales y marca empleadora en el orden y la intensidad que tu empresa necesite.</p>
+            <p>Partimos siempre de una conversación para entender el desafío y, a partir de ahí, diseñamos juntos el recorrido.</p>
+          </div>
+          <div class="facts">
+            <div class="fact">
+              <p class="eyebrow">Cómo armamos la propuesta</p>
+              <ul class="clean">
+                <li><strong>Escuchamos.</strong> Una primera conversación con Dirección, RRHH o Comunicación para entender qué está pasando y qué se quiere lograr.</li>
+                <li><strong>Diagnosticamos.</strong> Con el Diagnóstico 360° completo o con un relevamiento más corto, según el caso.</li>
+                <li><strong>Combinamos.</strong> Elegimos qué productos aplicar, en qué orden y con qué equipos.</li>
+                <li><strong>Acompañamos.</strong> Seguimos la implementación para que los cambios queden instalados en la organización.</li>
+              </ul>
+            </div>
+            <div class="fact">
+              <p class="eyebrow">Algunas combinaciones posibles</p>
+              <ul class="clean">
+                <li><strong>Diagnóstico 360° + Arquitectura de Canales</strong>, para empresas que crecieron rápido y multiplicaron canales y reuniones.</li>
+                <li><strong>Escuela de Líderes + Laboratorio de Soluciones</strong>, para equipos que necesitan coordinarse mejor entre áreas.</li>
+                <li><strong>Red de Agentes de Comunicación + Marca Empleadora</strong>, para convertir historias internas en reputación.</li>
+              </ul>
+            </div>
+            <div class="fact span">
+              <p class="eyebrow">Para quién</p>
+              <p>Organizaciones que saben que tienen un desafío de comunicación, pero cuyo caso no entra en un solo formato, o que quieren encarar un proceso de transformación más amplio.</p>
+            </div>
+          </div>
         </div>
       </details>
 
