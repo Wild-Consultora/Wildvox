@@ -318,12 +318,20 @@ ol.steps li::before { content: counter(step); font-family: var(--f-serif); font-
   font-family: var(--f-serif); font-size: var(--step-3); line-height: 1.12; max-width: 22ch; color: var(--paper);
 }
 .closing .callout-big em { font-style: normal; color: var(--blush); }
-.closing .logos-light {
-  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
-  background: var(--paper); border-radius: var(--radius); padding: 22px 28px; justify-self: start;
+.contacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.contact {
+  background: var(--paper); color: var(--ink); border-radius: var(--radius);
+  padding: clamp(20px, 3vw, 30px); display: grid; gap: 20px; align-content: start;
 }
-.closing .logos-light .wild { width: 120px; }
-.closing .logos-light .vox { width: 160px; }
+.contact .logo-link { justify-self: start; }
+.contact .wild { width: 130px; }
+.contact .vox { width: 159px; }
+.contact-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 16px; }
+.contact-list li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); align-items: baseline; gap: 12px; }
+.contact-list .k { font-size: var(--step--1); font-weight: 600; font-stretch: 115%; text-transform: uppercase; letter-spacing: .12em; color: var(--green); }
+.contact-list a { justify-self: start; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; border-bottom: 2px solid var(--mint); }
+.contact-list a:hover { border-bottom-color: var(--coral); }
+@media (max-width: 640px) { .contacts { grid-template-columns: 1fr; } }
 footer { padding-block: 26px; font-size: var(--step--1); color: var(--ink-soft); }
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
@@ -829,9 +837,22 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
   <div class="wrap">
     <p class="eyebrow">Hablemos</p>
     <p class="callout-big">Transformemos la comunicación de tu empresa en <em>un activo estratégico que potencie tu negocio.</em></p>
-    <div class="logos-light">
-      <a class="logo-link" href="https://www.wildconsultora.com" target="_blank" rel="noopener" title="Ir a wildconsultora.com"><img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240"></a>
-      <a class="logo-link" href="https://agencia-vox.com/" target="_blank" rel="noopener" title="Ir a agencia-vox.com"><img class="vox" src="img/vox.png" alt="Vox – Estrategias de Comunicación" width="1129" height="383"></a>
+    <!-- Contactos: una tarjeta por consultora -->
+    <div class="contacts">
+      <div class="contact">
+        <a class="logo-link" href="https://www.wildconsultora.com" target="_blank" rel="noopener" title="Ir a wildconsultora.com"><img class="wild" src="img/wild.png" alt="Wild Consultora" width="580" height="240"></a>
+        <ul class="contact-list">
+          <li><span class="k">Mail</span><a href="mailto:hola@wildconsultora.com">hola@wildconsultora.com</a></li>
+          <li><span class="k">Teléfono</span><a href="tel:+5491166381931">+54 9 11 6638-1931</a></li>
+        </ul>
+      </div>
+      <div class="contact">
+        <a class="logo-link" href="https://agencia-vox.com/" target="_blank" rel="noopener" title="Ir a agencia-vox.com"><img class="vox" src="img/vox.png" alt="Vox – Estrategias de Comunicación" width="1129" height="383"></a>
+        <ul class="contact-list">
+          <li><span class="k">Mail</span><a href="mailto:contacto@agencia-vox.com">contacto@agencia-vox.com</a></li>
+          <li><span class="k">Teléfono</span><a href="tel:+5491153869574">+54 9 11 5386-9574</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
